@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { supabase } from './lib/supabase';
-import { useAuth } from './hooks/useAuth';
 import { AuthProvider } from './contexts/AuthContext';
 
 // Layout Components
@@ -49,54 +47,8 @@ import Help from './pages/Shared/Help';
 import ProtectedRoute from './components/Auth/ProtectedRoute';
 
 function App() {
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [profile, setProfile] = useState(null);
-
-  useEffect(() => {
-    // Get initial session
-    const getSession = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      setUser(session?.user ?? null);
-      setLoading(false);
-    };
-
-    getSession();
-
-    // Listen for auth changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      async (event, session) => {
-        setUser(session?.user ?? null);
-        setLoading(false);
-        
-        // Fetch user profile when user changes
-        if (session?.user) {
-          const { data: profileData } = await supabase
-            .from('profiles')
-            .select('*')
-            .eq('id', session.user.id)
-            .single();
-          
-          setProfile(profileData);
-        } else {
-          setProfile(null);
-        }
-      }
-    );
-
-    return () => subscription.unsubscribe();
-  }, []);
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-paper flex items-center justify-center">
-        <div className="animate-spin rounded-full h-32 w-32 border-b-4 border-crimson"></div>
-      </div>
-    );
-  }
-
   return (
-    <AuthProvider value={{ user, profile, setUser, setProfile }}>
+    <AuthProvider>
       <Routes>
         {/* Public Routes */}
         <Route path="/login" element={<AuthLayout><Login /></AuthLayout>} />
