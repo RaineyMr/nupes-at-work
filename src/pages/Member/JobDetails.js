@@ -191,7 +191,7 @@ const JobDetails = () => {
               <div className="flex items-center space-x-4 text-sm text-gray-500">
                 <div className="flex items-center">
                   <BuildingOfficeIcon className="h-4 w-4 mr-1" />
-                  {job.employer?.company_name}
+                  {job.employer.company_name}
                 </div>
                 <div className="flex items-center">
                   <MapPinIcon className="h-4 w-4 mr-1" />

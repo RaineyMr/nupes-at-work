@@ -95,7 +95,7 @@ const MemberDashboard = () => {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-4 border-crimson"></div>
       </div>
     );
   }
@@ -104,39 +104,40 @@ const MemberDashboard = () => {
     <div className="space-y-8">
       {/* Welcome Header */}
       <div>
-        <h1 className="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
-          Welcome back, {profile?.first_name}! 👋
+        <h1 className="nupes-heading text-2xl font-bold leading-7 sm:truncate sm:text-3xl sm:tracking-tight">
+          Welcome back, Brother {profile?.first_name}!
         </h1>
-        <p className="mt-2 text-sm text-gray-600">
-          Here's what's happening with your job search and career development.
+        <p className="mt-2 text-sm text-charcoal">
+          Here's where your next opportunity begins.
         </p>
+        <div className="nupes-divider"></div>
       </div>
 
       {/* Stats Grid */}
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-        <div className="bg-white overflow-hidden shadow rounded-lg">
+        <div className="nupes-metric-card">
           <div className="p-5">
             <div className="flex items-center">
               <div className="flex-shrink-0">
-                <BriefcaseIcon className="h-6 w-6 text-gray-400" aria-hidden="true" />
+                <BriefcaseIcon className="h-6 w-6 text-crimson" aria-hidden="true" />
               </div>
               <div className="ml-5 w-0 flex-1">
                 <dl>
-                  <dt className="text-sm font-medium text-gray-500 truncate">
+                  <dt className="text-sm font-medium text-steel truncate">
                     Matched Jobs
                   </dt>
-                  <dd className="text-lg font-medium text-gray-900">
+                  <dd className="text-lg font-medium text-crimson">
                     {stats.matchedJobs}
                   </dd>
                 </dl>
               </div>
             </div>
           </div>
-          <div className="bg-gray-50 px-5 py-3">
+          <div className="bg-cream px-5 py-3">
             <div className="text-sm">
               <Link
                 to="/jobs"
-                className="font-medium text-blue-600 hover:text-blue-500"
+                className="font-medium text-crimson hover:text-red-800"
               >
                 View all jobs →
               </Link>
@@ -270,7 +271,7 @@ const MemberDashboard = () => {
                             {match.job?.title}
                           </p>
                           <p className="text-sm text-gray-500">
-                            {match.job?.company_name} • {match.job?.location}
+                            {match.employer?.company_name} • {match.job?.location}
                           </p>
                         </div>
                         <div className="flex items-center space-x-2">

@@ -112,10 +112,12 @@ export const supabaseHelpers = {
         *,
         job:jobs(
           title,
-          company_name,
           location,
           job_type,
           status
+        ),
+        employer:profiles!employer_id(
+          company_name
         )
       `)
       .eq('profile_id', userId)

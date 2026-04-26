@@ -24,13 +24,19 @@ const HiringPipeline = () => {
   const loadPipeline = async () => {
     try {
       // Load all applications for employer's jobs
+      const { data: jobs } = await supabaseHelpers.getJobs({
+        employer_id: user?.id,
+        status: 'open'
+      });
       const { data, error } = await supabase
         .from('applications')
         .select(`
           *,
           job:jobs(
             title,
-            company_name
+            employer:employers!employer_id_fkey(
+              company_name
+            )
           ),
           profile:profiles!profile_id_fkey(
             first_name,

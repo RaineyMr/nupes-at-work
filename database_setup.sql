@@ -146,7 +146,7 @@ CREATE TABLE hiring_records (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   offer_id UUID REFERENCES offer_records(id) ON DELETE CASCADE,
   start_date DATE,
-  end_date, -- if known
+  end_date DATE, -- if known
   feedback_score INTEGER, -- 1-5
   feedback_text TEXT,
   member_rating INTEGER, -- 1-5
@@ -321,3 +321,7 @@ CREATE POLICY "Users can view own preferences" ON member_preferences
 -- Users can manage own preferences
 CREATE POLICY "Users can manage own preferences" ON member_preferences
   FOR ALL USING (auth.uid() = profile_id);
+
+-- Users can view all member_preferences (for system functionality)
+CREATE POLICY "Users can view all member_preferences" ON member_preferences
+  FOR SELECT USING (true);

@@ -27,54 +27,62 @@
 
   /* Form styles */
   .form-input {
-    @apply block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm;
+    @apply block w-full rounded-sm border-fog bg-paper shadow-sm focus:border-crimson focus:ring-crimson sm:text-sm;
   }
 
   .form-select {
-    @apply block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm;
+    @apply block w-full rounded-sm border-fog bg-paper shadow-sm focus:border-crimson focus:ring-crimson sm:text-sm;
   }
 
   .form-textarea {
-    @apply block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm;
+    @apply block w-full rounded-sm border-fog bg-paper shadow-sm focus:border-crimson focus:ring-crimson sm:text-sm;
   }
 
   /* Button styles */
   .btn-primary {
-    @apply inline-flex justify-center rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600;
+    @apply inline-flex justify-center rounded-sm border border-transparent bg-crimson py-2.5 px-4 text-sm font-medium text-on-crimson shadow-sm hover:bg-red-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-crimson;
   }
 
   .btn-secondary {
-    @apply inline-flex justify-center rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600;
+    @apply inline-flex justify-center rounded-sm border border-crimson bg-transparent py-2.5 px-4 text-sm font-medium text-crimson shadow-sm hover:bg-crimson hover:text-on-crimson focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-crimson;
+  }
+
+  .btn-ghost {
+    @apply inline-flex justify-center rounded-sm border border-transparent bg-transparent py-2.5 px-4 text-sm font-medium text-charcoal shadow-sm hover:bg-fog focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-charcoal;
   }
 
   .btn-success {
-    @apply inline-flex justify-center rounded-md border border-transparent bg-green-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-600;
+    @apply inline-flex justify-center rounded-sm border border-transparent bg-success py-2.5 px-4 text-sm font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-success;
   }
 
   /* Card styles */
   .card {
-    @apply bg-white shadow rounded-lg;
+    @apply bg-white shadow-card rounded-md;
   }
 
   .card-header {
-    @apply px-4 py-5 sm:p-6;
+    @apply px-6 py-5;
   }
 
   .card-body {
-    @apply px-4 py-5 sm:p-6;
+    @apply px-6 py-5;
+  }
+
+  .job-card {
+    @apply bg-cream border-l-4 border-crimson shadow-card rounded-md;
   }
 
   /* Navigation styles */
   .nav-link {
-    @apply group flex items-center px-2 py-2 text-sm font-medium border-l-4 rounded-md;
+    @apply group flex items-center px-3 py-2 text-sm font-medium rounded-sm;
   }
 
   .nav-link-active {
-    @apply bg-blue-50 border-blue-500 text-blue-700;
+    @apply bg-crimson text-on-crimson;
   }
 
   .nav-link-inactive {
-    @apply border-transparent text-gray-600 hover:bg-gray-50 hover:text-gray-900;
+    @apply text-charcoal hover:bg-fog hover:text-on-cream;
   }
 
   /* Loading states */
@@ -92,28 +100,32 @@
 
   /* Status badges */
   .status-badge {
-    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+    @apply inline-flex items-center px-2 py-1 rounded-sm text-xs font-medium;
   }
 
   .status-success {
-    @apply bg-green-100 text-green-800;
+    @apply bg-green-50 text-green-800;
   }
 
-  .status-warning {
-    @apply bg-yellow-100 text-yellow-800;
+  .status-active {
+    @apply bg-blue-50 text-blue-800;
+  }
+
+  .status-pending {
+    @apply bg-yellow-50 text-yellow-800;
   }
 
   .status-error {
-    @apply bg-red-100 text-red-800;
+    @apply bg-red-50 text-red-800;
   }
 
   .status-info {
-    @apply bg-blue-100 text-blue-800;
+    @apply bg-blue-50 text-blue-800;
   }
 
   /* Skill tags */
   .skill-tag {
-    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800;
+    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-fog text-charcoal;
   }
 
   /* Match score styles */
@@ -166,6 +178,40 @@
       display: none !important;
     }
   }
+}
+
+/* Nupes specific utilities */
+.nupes-divider {
+  @apply h-px bg-gradient-to-r from-crimson to-transparent opacity-30 my-4;
+}
+
+.nupes-sidebar {
+  @apply bg-cream w-60 border-r border-fog;
+}
+
+.nupes-topnav {
+  @apply bg-crimson h-16 flex items-center justify-between px-6 text-on-crimson sticky top-0 z-50;
+}
+
+.nupes-metric-card {
+  @apply bg-white shadow-card rounded-md p-4 text-center;
+}
+
+.nupes-progress-bar {
+  @apply w-full h-2 bg-fog rounded-full overflow-hidden;
+}
+
+.nupes-progress-fill {
+  @apply h-full bg-crimson rounded-full transition-all duration-300;
+}
+
+/* Typography utilities */
+.nupes-heading {
+  @apply font-display text-crimson;
+}
+
+.nupes-body {
+  @apply text-charcoal;
 }
 
 /* Dark mode support */

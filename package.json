@@ -43,5 +43,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "future": {
+    "v7_startTransition": true,
+    "v7_relativeSplatPath": true
   }
 }

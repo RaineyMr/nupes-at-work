@@ -64,36 +64,36 @@ const Layout = () => {
   const roleBasedNav = getRoleBasedNav();
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-paper">
       {/* Desktop Sidebar */}
-      <div className="hidden md:fixed md:inset-y-0 md:flex md:w-64 md:flex-col">
-        <div className="flex min-h-0 flex-1 flex-col border-r border-gray-200 bg-white">
+      <div className="hidden md:fixed md:inset-y-0 md:flex md:w-60 md:flex-col">
+        <div className="flex min-h-0 flex-1 flex-col border-r border-fog bg-cream">
           {/* Logo */}
-          <div className="flex h-16 flex-shrink-0 items-center px-4 border-b border-gray-200">
+          <div className="flex h-16 flex-shrink-0 items-center px-6 border-b border-fog">
             <div className="flex items-center">
-              <div className="h-8 w-8 rounded-lg bg-blue-600 flex items-center justify-center">
-                <span className="text-white font-bold text-sm">NW</span>
+              <div className="h-8 w-8 rounded-md bg-crimson flex items-center justify-center">
+                <span className="text-on-crimson font-bold text-sm font-display">NW</span>
               </div>
-              <span className="ml-2 text-xl font-semibold text-gray-900">Nupes at Work</span>
+              <span className="ml-2 text-xl font-semibold text-crimson font-display">Nupes at Work</span>
             </div>
           </div>
 
           {/* Navigation */}
           <div className="flex flex-1 flex-col overflow-y-auto">
-            <nav className="flex-1 space-y-1 px-2 py-4">
+            <nav className="flex-1 space-y-1 px-3 py-4">
               {navigation.map((item) => (
                 <Link
                   key={item.name}
                   to={item.href}
                   className={`${
                     item.current
-                      ? 'bg-blue-50 border-blue-500 text-blue-700'
-                      : 'border-transparent text-gray-600 hover:bg-gray-50 hover:text-gray-900'
-                  } group flex items-center px-2 py-2 text-sm font-medium border-l-4 rounded-md`}
+                      ? 'bg-crimson text-on-crimson'
+                      : 'text-charcoal hover:bg-fog'
+                  } group flex items-center px-3 py-2 text-sm font-medium rounded-sm`}
                 >
                   <item.icon
                     className={`${
-                      item.current ? 'text-blue-500' : 'text-gray-400 group-hover:text-gray-500'
+                      item.current ? 'text-on-crimson' : 'text-steel group-hover:text-charcoal'
                     } mr-3 h-5 w-5`}
                     aria-hidden="true"
                   />
@@ -106,10 +106,10 @@ const Layout = () => {
                 <Link
                   key={item.name}
                   to={item.href}
-                  className="border-transparent text-gray-600 hover:bg-gray-50 hover:text-gray-900 group flex items-center px-2 py-2 text-sm font-medium border-l-4 rounded-md"
+                  className="text-charcoal hover:bg-fog group flex items-center px-3 py-2 text-sm font-medium rounded-sm"
                 >
                   <item.icon
-                    className="text-gray-400 group-hover:text-gray-500 mr-3 h-5 w-5"
+                    className="text-steel group-hover:text-charcoal mr-3 h-5 w-5"
                     aria-hidden="true"
                   />
                   {item.name}
@@ -118,16 +118,16 @@ const Layout = () => {
             </nav>
 
             {/* User menu */}
-            <div className="flex-shrink-0 border-t border-gray-200 p-4">
+            <div className="flex-shrink-0 border-t border-fog p-4">
               <div className="flex items-center">
-                <div className="h-8 w-8 rounded-full bg-gray-300 flex items-center justify-center">
+                <div className="h-8 w-8 rounded-full bg-gold flex items-center justify-center text-crimson font-semibold">
                   {profile?.first_name?.[0] || user?.email?.[0]?.toUpperCase()}
                 </div>
                 <div className="ml-3">
-                  <p className="text-sm font-medium text-gray-700">
+                  <p className="text-sm font-medium text-charcoal">
                     {profile?.first_name} {profile?.last_name}
                   </p>
-                  <p className="text-xs font-medium text-gray-500 capitalize">
+                  <p className="text-xs font-medium text-steel capitalize">
                     {profile?.role}
                   </p>
                 </div>
@@ -137,17 +137,17 @@ const Layout = () => {
                   <Link
                     key={item.name}
                     to={item.href}
-                    className="group flex items-center px-2 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-gray-900"
+                    className="group flex items-center px-3 py-2 text-sm font-medium text-charcoal rounded-sm hover:bg-fog"
                   >
-                    <item.icon className="text-gray-400 group-hover:text-gray-500 mr-3 h-5 w-5" />
+                    <item.icon className="text-steel group-hover:text-charcoal mr-3 h-5 w-5" />
                     {item.name}
                   </Link>
                 ))}
                 <button
                   onClick={signOut}
-                  className="group flex items-center px-2 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-gray-900 w-full text-left"
+                  className="group flex items-center px-3 py-2 text-sm font-medium text-charcoal rounded-sm hover:bg-fog w-full text-left"
                 >
-                  <ArrowRightOnRectangleIcon className="text-gray-400 group-hover:text-gray-500 mr-3 h-5 w-5" />
+                  <ArrowRightOnRectangleIcon className="text-steel group-hover:text-charcoal mr-3 h-5 w-5" />
                   Sign out
                 </button>
               </div>
@@ -157,18 +157,18 @@ const Layout = () => {
       </div>
 
       {/* Main content */}
-      <div className="flex flex-col md:pl-64">
+      <div className="flex flex-col md:pl-60">
         {/* Mobile header */}
-        <div className="sticky top-0 z-10 flex h-16 flex-shrink-0 bg-white border-b border-gray-200 md:hidden">
-          <div className="flex flex-1 justify-between px-4 sm:px-6 lg:px-8">
+        <div className="nupes-topnav md:hidden">
+          <div className="flex flex-1 justify-between px-6">
             <div className="flex items-center">
-              <div className="h-8 w-8 rounded-lg bg-blue-600 flex items-center justify-center">
-                <span className="text-white font-bold text-sm">NW</span>
+              <div className="h-8 w-8 rounded-md bg-crimson flex items-center justify-center">
+                <span className="text-on-crimson font-bold text-sm font-display">NW</span>
               </div>
-              <span className="ml-2 text-xl font-semibold text-gray-900">Nupes at Work</span>
+              <span className="ml-2 text-xl font-semibold text-on-crimson font-display">Nupes at Work</span>
             </div>
             <div className="flex items-center">
-              <div className="h-8 w-8 rounded-full bg-gray-300 flex items-center justify-center">
+              <div className="h-8 w-8 rounded-full bg-gold flex items-center justify-center text-crimson font-semibold">
                 {profile?.first_name?.[0] || user?.email?.[0]?.toUpperCase()}
               </div>
             </div>

@@ -4,12 +4,13 @@ import { useForm } from 'react-hook-form';
 import { supabase } from '../../lib/supabase';
 import { useAuth } from '../../hooks/useAuth';
 import toast from 'react-hot-toast';
-import { EnvelopeIcon, LockClosedIcon } from '@heroicons/react/24/outline';
+import { EnvelopeIcon, LockClosedIcon, EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
 
 const Login = () => {
-  const [loading, setLoading] = useState(false);
   const { setUser } = useAuth();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   
   const {
     register,
@@ -27,7 +28,7 @@ const Login = () => {
       });
 
       if (error) throw error;
-
+      
       setUser(authData.user);
       toast.success('Welcome back!');
       navigate('/dashboard');
@@ -39,19 +40,19 @@ const Login = () => {
   };
 
   return (
-    <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-      <h2 className="text-2xl font-bold leading-9 tracking-tight text-gray-900">
+    <div className="bg-white py-8 px-4 shadow-card rounded-md sm:px-10">
+      <h2 className="text-2xl font-display font-bold leading-9 tracking-tight text-crimson">
         Sign in to your account
       </h2>
       
       <form className="mt-6 space-y-6" onSubmit={handleSubmit(onSubmit)}>
         <div>
-          <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
+          <label htmlFor="email" className="block text-sm font-medium leading-6 text-charcoal">
             Email address
           </label>
           <div className="relative mt-2 rounded-md shadow-sm">
             <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-              <EnvelopeIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
+              <EnvelopeIcon className="h-5 w-5 text-steel" aria-hidden="true" />
             </div>
             <input
               {...register('email', {
@@ -62,7 +63,8 @@ const Login = () => {
                 },
               })}
               type="email"
-              className="block w-full rounded-md border-0 py-1.5 pl-10 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
+              autoComplete="email"
+              className="form-input pl-10"
               placeholder="Enter your email"
             />
           </div>
@@ -72,12 +74,12 @@ const Login = () => {
         </div>
 
         <div>
-          <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
+          <label htmlFor="password" className="block text-sm font-medium leading-6 text-charcoal">
             Password
           </label>
           <div className="relative mt-2 rounded-md shadow-sm">
             <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-              <LockClosedIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
+              <LockClosedIcon className="h-5 w-5 text-steel" aria-hidden="true" />
             </div>
             <input
               {...register('password', {
@@ -87,10 +89,22 @@ const Login = () => {
                   message: 'Password must be at least 6 characters',
                 },
               })}
-              type="password"
-              className="block w-full rounded-md border-0 py-1.5 pl-10 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
+              type={showPassword ? "text" : "password"}
+              autoComplete="current-password"
+              className="form-input pl-10 pr-10"
               placeholder="Enter your password"
             />
+            <button
+              type="button"
+              className="absolute inset-y-0 right-0 flex items-center pr-3 text-steel hover:text-crimson"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? (
+                <EyeSlashIcon className="h-5 w-5" />
+              ) : (
+                <EyeIcon className="h-5 w-5" />
+              )}
+            </button>
           </div>
           {errors.password && (
             <p className="mt-2 text-sm text-red-600">{errors.password.message}</p>
@@ -103,9 +117,9 @@ const Login = () => {
               id="remember-me"
               name="remember-me"
               type="checkbox"
-              className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-600"
+              className="h-4 w-4 rounded border-fog text-crimson focus:ring-crimson"
             />
-            <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
+            <label htmlFor="remember-me" className="ml-2 block text-sm text-charcoal">
               Remember me
             </label>
           </div>
@@ -113,7 +127,7 @@ const Login = () => {
           <div className="text-sm">
             <Link
               to="/forgot-password"
-              className="font-medium text-blue-600 hover:text-blue-500"
+              className="font-medium text-crimson hover:text-red-800"
             >
               Forgot your password?
             </Link>
@@ -124,18 +138,18 @@ const Login = () => {
           <button
             type="submit"
             disabled={loading}
-            className="flex w-full justify-center rounded-md bg-blue-600 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="btn-primary w-full disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {loading ? 'Signing in...' : 'Sign in'}
           </button>
         </div>
       </form>
 
-      <p className="mt-6 text-center text-sm text-gray-600">
+      <p className="mt-6 text-center text-sm text-steel">
         Not a member?{' '}
         <Link
           to="/signup"
-          className="font-medium text-blue-600 hover:text-blue-500"
+          className="font-medium text-crimson hover:text-red-800"
         >
           Sign up now
         </Link>
