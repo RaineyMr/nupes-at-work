@@ -26,6 +26,8 @@
     "clsx": "^1.2.1"
   },
   "devDependencies": {
+    "@tailwindcss/forms": "^0.5.3",
+    "@tailwindcss/typography": "^0.5.9",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
     "typescript": "^4.9.5"
