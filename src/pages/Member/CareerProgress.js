@@ -3,7 +3,7 @@ import { useAuth } from '../../hooks/useAuth';
 import { supabaseHelpers } from '../../lib/supabase';
 import {
   AcademicCapIcon,
-  TrendingUpIcon,
+  ArrowTrendingUpIcon,
   ChartBarIcon,
   ClockIcon,
 } from '@heroicons/react/24/outline';
@@ -73,10 +73,9 @@ const CareerProgress = () => {
               </div>
               <div className="text-sm text-gray-500">Skills Developed</div>
             </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-green-600">
-                {progress?.journey?.length || 0}
-              </div>
+            <div className="flex items-center">
+                <ArrowTrendingUpIcon className="h-8 w-8 text-green-600 mr-3" />
+                <div>{progress?.journey?.length || 0}</div>
               <div className="text-sm text-gray-500">Milestones Reached</div>
             </div>
             <div className="text-center">

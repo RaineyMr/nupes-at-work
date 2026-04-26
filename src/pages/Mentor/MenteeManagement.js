@@ -8,7 +8,6 @@ import {
   UserGroupIcon,
   ChatBubbleLeftRightIcon,
   ClockIcon,
-  TrendingUpIcon,
   PlusCircleIcon,
 } from '@heroicons/react/24/outline';
 
@@ -28,11 +27,9 @@ const MenteeManagement = () => {
 
   const loadMentee = async () => {
     try {
-      // Load mentee profile
       const { data: profile } = await supabaseHelpers.getProfile(id);
       if (profile) setMentee(profile);
       
-      // Load mentorship data
       const { data: mentorship } = await supabase
         .from('mentorships')
         .select('*')
@@ -98,7 +95,6 @@ const MenteeManagement = () => {
 
   return (
     <div className="space-y-8">
-      {/* Header */}
       <div>
         <h1 className="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
           Mentee Management
@@ -110,7 +106,6 @@ const MenteeManagement = () => {
 
       {mentee ? (
         <>
-          {/* Mentee Profile */}
           <div className="bg-white shadow rounded-lg">
             <div className="px-4 py-5 sm:p-6">
               <h3 className="text-lg font-medium leading-6 text-gray-900 mb-4">
@@ -159,7 +154,6 @@ const MenteeManagement = () => {
             </div>
           </div>
 
-          {/* Mentorship Management */}
           <div className="bg-white shadow rounded-lg">
             <div className="px-4 py-5 sm:p-6">
               <h3 className="text-lg font-medium leading-6 text-gray-900 mb-4">
@@ -167,7 +161,6 @@ const MenteeManagement = () => {
               </h3>
               
               <div className="space-y-6">
-                {/* Status */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700">
                     Mentorship Status
@@ -186,7 +179,6 @@ const MenteeManagement = () => {
                   </select>
                 </div>
 
-                {/* Focus Areas */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-4">
                     Focus Areas
@@ -210,27 +202,26 @@ const MenteeManagement = () => {
                       </button>
                     </div>
                   </div>
-                    <div className="flex flex-wrap gap-2">
-                      {focusAreas.map((area, index) => (
-                        <span
-                          key={index}
-                          className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800"
+                    
+                  <div className="flex flex-wrap gap-2">
+                    {focusAreas.map((area, index) => (
+                      <span
+                        key={index}
+                        className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800"
+                      >
+                        {area}
+                        <button
+                          type="button"
+                          onClick={() => removeFocusArea(area)}
+                          className="ml-2 text-blue-600 hover:text-blue-800"
                         >
-                          {area}
-                          <button
-                            type="button"
-                            onClick={() => removeFocusArea(area)}
-                            className="ml-2 text-blue-600 hover:text-blue-800"
-                          >
-                            ×
-                          </button>
-                        </span>
-                      ))}
-                    </div>
+                          ×
+                        </button>
+                      </span>
+                    ))}
                   </div>
                 </div>
 
-                {/* Notes */}
                 <div>
                   <label htmlFor="notes" className="block text-sm font-medium text-gray-700">
                     Mentorship Notes
@@ -256,7 +247,6 @@ const MenteeManagement = () => {
             </div>
           </div>
 
-          {/* Progress Tracking */}
           <div className="bg-white shadow rounded-lg">
             <div className="px-4 py-5 sm:p-6">
               <h3 className="text-lg font-medium leading-6 text-gray-900 mb-4">
@@ -283,7 +273,7 @@ const MenteeManagement = () => {
 
                 <div className="mt-4 p-4 bg-blue-50 rounded-lg">
                   <div className="flex items-center">
-                    <TrendingUpIcon className="h-8 w-8 text-blue-600 mr-3" />
+                    <ClockIcon className="h-8 w-8 text-blue-600 mr-3" />
                     <div>
                       <h4 className="text-lg font-medium text-blue-900">Keep up the great work!</h4>
                       <p className="text-sm text-blue-700">

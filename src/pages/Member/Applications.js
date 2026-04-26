@@ -11,7 +11,7 @@ import {
   ClockIcon,
   StarIcon,
   EyeIcon,
-  ArrowTrendingUpIcon,
+  MapPinIcon,
 } from '@heroicons/react/24/outline';
 import { StarIcon as StarIconSolid } from '@heroicons/react/24/solid';
 
@@ -90,8 +90,6 @@ const Applications = () => {
     return stats;
   };
 
-  const stats = getStatusStats();
-
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
@@ -102,7 +100,6 @@ const Applications = () => {
 
   return (
     <div className="space-y-8">
-      {/* Header */}
       <div>
         <h1 className="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
           My Applications
@@ -112,75 +109,44 @@ const Applications = () => {
         </p>
       </div>
 
-      {/* Stats Overview */}
       <div className="bg-white shadow rounded-lg">
         <div className="px-4 py-5 sm:p-6">
           <h3 className="text-lg font-medium leading-6 text-gray-900 mb-4">
             Application Overview
           </h3>
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-3 lg:grid-cols-6">
             <div className="text-center">
-              <div className="text-2xl font-bold text-gray-900">{stats.total}</div>
+              <div className="text-2xl font-bold text-gray-900">{getStatusStats().total}</div>
               <div className="text-sm text-gray-500">Total Applications</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-blue-600">{stats.applied}</div>
+              <div className="text-2xl font-bold text-gray-900">{getStatusStats().applied}</div>
               <div className="text-sm text-gray-500">Applied</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-blue-600">{stats.interviewed}</div>
+              <div className="text-2xl font-bold text-gray-900">{getStatusStats().interviewed}</div>
               <div className="text-sm text-gray-500">Interviews</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-yellow-600">{stats.offer_extended}</div>
+              <div className="text-2xl font-bold text-gray-900">{getStatusStats().offer_extended}</div>
               <div className="text-sm text-gray-500">Offers</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-green-600">{stats.hired}</div>
+              <div className="text-2xl font-bold text-gray-900">{getStatusStats().hired}</div>
               <div className="text-sm text-gray-500">Hired</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-red-600">{stats.rejected}</div>
+              <div className="text-2xl font-bold text-gray-900">{getStatusStats().rejected}</div>
               <div className="text-sm text-gray-500">Rejected</div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Filter Tabs */}
-      <div className="bg-white shadow rounded-lg">
-        <div className="px-4 py-5 sm:p-6">
-          <div className="border-b border-gray-200">
-            <nav className="-mb-px flex space-x-8">
-              {[
-                { key: 'all', label: 'All Applications', count: stats.total },
-                { key: 'applied', label: 'Applied', count: stats.applied },
-                { key: 'interviewed', label: 'Interviews', count: stats.interviewed },
-                { key: 'offer_extended', label: 'Offers', count: stats.offer_extended },
-                { key: 'hired', label: 'Hired', count: stats.hired },
-              ].map((tab) => (
-                <button
-                  key={tab.key}
-                  onClick={() => setFilter(tab.key)}
-                  className={`${
-                    filter === tab.key
-                      ? 'border-blue-500 text-blue-600'
-                      : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-                  } whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm`}
-                >
-                  {tab.label} ({tab.count})
-                </button>
-              ))}
-            </nav>
-          </div>
-        </div>
-      </div>
-
-      {/* Applications List */}
       <div className="bg-white shadow rounded-lg">
         <div className="px-4 py-5 sm:p-6">
           <h3 className="text-lg font-medium leading-6 text-gray-900 mb-4">
-            No {filter === 'all' ? '' : `${filter.toLowerCase()} `}applications
+            {filter === 'all' ? 'All Applications' : `${filter.charAt(0).toUpperCase() + filter.slice(1)} Applications`}
           </h3>
           
           {filteredApplications.length > 0 ? (
@@ -236,14 +202,6 @@ const Applications = () => {
                             </Link>
                           </div>
                         </div>
-
-                        {application.cover_note && (
-                          <div className="mt-2 p-3 bg-gray-50 rounded-md">
-                            <p className="text-sm text-gray-600">
-                              <strong>Cover Note:</strong> {application.cover_note}
-                            </p>
-                          </div>
-                        )}
                       </div>
                     </div>
                   </li>
@@ -254,10 +212,13 @@ const Applications = () => {
             <div className="text-center py-12">
               <DocumentTextIcon className="mx-auto h-12 w-12 text-gray-400" />
               <h3 className="mt-2 text-sm font-medium text-gray-900">
-                No applications
+                No {filter === 'all' ? '' : `${filter.toLowerCase()} `} applications
               </h3>
               <p className="mt-1 text-sm text-gray-500">
-                Start applying to jobs to see your applications here.
+                {filter === 'all' 
+                  ? 'Start applying to jobs to see your applications here.'
+                  : `No ${filter.toLowerCase()} applications yet.`
+                }
               </p>
               <div className="mt-6">
                 <Link
@@ -270,42 +231,6 @@ const Applications = () => {
               </div>
             </div>
           )}
-        </div>
-      </div>
-
-      {/* Success Metrics */}
-      <div className="bg-white shadow rounded-lg">
-        <div className="px-4 py-5 sm:p-6">
-          <h3 className="text-lg font-medium leading-6 text-gray-900 mb-4">
-            Success Metrics
-          </h3>
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-            <div className="text-center">
-              <div className="text-2xl font-bold text-green-600">
-                {stats.total > 0 ? Math.round((stats.hired / stats.total) * 100) : 0}%
-              </div>
-              <div className="text-sm text-gray-500">Application Success Rate</div>
-            </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-blue-600">
-                {stats.interviewed > 0 ? Math.round((stats.interviewed / stats.applied) * 100) : 0}%
-              </div>
-              <div className="text-sm text-gray-500">Interview Rate</div>
-            </div>
-          </div>
-          
-          {stats.hired > 0 && (
-            <div className="mt-6 p-4 bg-green-50 rounded-lg">
-              <div className="flex items-center">
-                <CheckCircleIcon className="h-8 w-8 text-green-600 mr-3" />
-                <div>
-                  <h4 className="text-lg font-medium text-green-900">Congratulations!</h4>
-                  <p className="text-sm text-green-700">
-                    You've secured {stats.hired} position{stats.hired > 1 ? 's' : ''} through the platform.
-                  </p>
-                </div>
-              </div>
-            )}
         </div>
       </div>
     </div>

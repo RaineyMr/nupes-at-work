@@ -43,14 +43,12 @@ const MentorProfile = () => {
 
   useEffect(() => {
     if (profile) {
-      // Set form values from existing profile
       Object.keys(profile).forEach(key => {
         if (key !== 'id' && key !== 'created_at' && key !== 'updated_at') {
           setValue(key, profile[key]);
         }
       });
       
-      // Load expertise areas
       if (profile.expertise_areas) {
         setExpertiseAreas(profile.expertise_areas);
       }
@@ -129,7 +127,6 @@ const MentorProfile = () => {
       <div className="bg-white shadow sm:rounded-lg">
         <div className="px-4 py-5 sm:p-6">
           <form className="mt-6 space-y-6" onSubmit={handleSubmit(onSubmit)}>
-            {/* Profile Photo */}
             <div className="sm:col-span-2">
               <label className="block text-sm font-medium text-gray-700 mb-4">
                 Profile Photo
@@ -155,7 +152,7 @@ const MentorProfile = () => {
                       onChange={handlePhotoUpload}
                       type="file"
                       accept="image/*"
-                      className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+                      className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
                       disabled={uploading}
                     />
                   </label>
@@ -164,7 +161,6 @@ const MentorProfile = () => {
               </div>
             </div>
 
-            {/* Basic Information */}
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
               <div>
                 <label htmlFor="first_name" className="block text-sm font-medium text-gray-700">
@@ -219,7 +215,6 @@ const MentorProfile = () => {
               />
             </div>
 
-            {/* Professional Information */}
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
               <div>
                 <label htmlFor="current_role" className="block text-sm font-medium text-gray-700">
@@ -258,28 +253,26 @@ const MentorProfile = () => {
               />
             </div>
 
-              <div>
-                <label htmlFor="linkedin_url" className="block text-sm font-medium text-gray-700">
-                  LinkedIn URL
-                </label>
-                <input
-                  {...register('linkedin_url', {
-                    pattern: {
-                      value: /^https?:\/\/.+/,
-                      message: 'Please enter a valid URL'
-                    }
-                  })}
-                  type="url"
-                  placeholder="https://linkedin.com/in/yourprofile"
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
-                />
-                {errors.linkedin_url && (
-                  <p className="mt-1 text-sm text-red-600">{errors.linkedin_url.message}</p>
-                )}
-              </div>
+            <div>
+              <label htmlFor="linkedin_url" className="block text-sm font-medium text-gray-700">
+                LinkedIn URL
+              </label>
+              <input
+                {...register('linkedin_url', {
+                  pattern: {
+                    value: /^https?:\/\/.+/,
+                    message: 'Please enter a valid URL'
+                  }
+                })}
+                type="url"
+                placeholder="https://linkedin.com/in/yourprofile"
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+              />
+              {errors.linkedin_url && (
+                <p className="mt-1 text-sm text-red-600">{errors.linkedin_url.message}</p>
+              )}
             </div>
 
-            {/* Expertise Areas */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-4">
                 Areas of Expertise
@@ -302,29 +295,27 @@ const MentorProfile = () => {
                     Add
                   </button>
                 </div>
-                </div>
+              </div>
                 
-                <div className="flex flex-wrap gap-2">
-                  {expertiseAreas.map((area, index) => (
-                    <span
-                      key={index}
-                      className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800"
+              <div className="flex flex-wrap gap-2">
+                {expertiseAreas.map((area, index) => (
+                  <span
+                    key={index}
+                    className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800"
+                  >
+                    {area}
+                    <button
+                      type="button"
+                      onClick={() => removeExpertiseArea(area)}
+                      className="ml-2 text-blue-600 hover:text-blue-800"
                     >
-                      {area}
-                      <button
-                        type="button"
-                        onClick={() => removeExpertiseArea(area)}
-                        className="ml-2 text-blue-600 hover:text-blue-800"
-                      >
-                        <XMarkIcon className="h-4 w-4" />
-                      </button>
-                    </span>
-                  ))}
-                </div>
+                      <XMarkIcon className="h-4 w-4" />
+                    </button>
+                  </span>
+                ))}
               </div>
             </div>
 
-            {/* Mentoring Preferences */}
             <div>
               <label htmlFor="mentoring_style" className="block text-sm font-medium text-gray-700">
                 Mentoring Style
@@ -367,7 +358,6 @@ const MentorProfile = () => {
       </div>
     </div>
   );
-};
 };
 
 export default MentorProfile;
