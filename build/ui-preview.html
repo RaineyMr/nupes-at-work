@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nupes at Work - UI Style Guide Preview</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Colors */
+            --crimson: #9D2235;
+            --cream: #F5E1C8;
+            --on-crimson: #FDF7F0;
+            --on-cream: #1F2933;
+            --ink: #111827;
+            --charcoal: #4B5563;
+            --steel: #9CA3AF;
+            --fog: #E5E7EB;
+            --paper: #F9FAFB;
+            --gold: #CFAF5A;
+            --success: #059669;
+            --warning: #D97706;
+            --error: #B91C1C;
+            
+            /* Spacing */
+            --space-1: 4px;
+            --space-2: 8px;
+            --space-3: 12px;
+            --space-4: 16px;
+            --space-6: 24px;
+            --space-8: 32px;
+            
+            /* Border Radius */
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-full: 999px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--paper);
+            color: var(--ink);
+            line-height: 1.6;
+        }
+
+        .display-font {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--space-6);
+        }
+
+        /* Typography */
+        h1 { font-size: 32px; line-height: 40px; font-weight: 700; margin-bottom: var(--space-4); }
+        h2 { font-size: 24px; line-height: 32px; font-weight: 600; margin-bottom: var(--space-3); }
+        h3 { font-size: 20px; line-height: 28px; font-weight: 600; margin-bottom: var(--space-2); }
+        .body { font-size: 16px; line-height: 24px; font-weight: 400; }
+        .caption { font-size: 13px; line-height: 18px; font-weight: 500; }
+
+        /* Navigation */
+        .top-nav {
+            background-color: var(--crimson);
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 var(--space-6);
+            color: var(--on-crimson);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .nav-right {
+            display: flex;
+            gap: var(--space-4);
+            align-items: center;
+        }
+
+        .nav-icon {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-full);
+            background-color: var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: var(--crimson);
+            cursor: pointer;
+        }
+
+        /* Layout */
+        .dashboard-layout {
+            display: flex;
+            min-height: calc(100vh - 64px);
+        }
+
+        .sidebar {
+            width: 240px;
+            background-color: var(--cream);
+            padding: var(--space-6);
+            border-right: 1px solid var(--fog);
+        }
+
+        .sidebar-section {
+            margin-bottom: var(--space-6);
+        }
+
+        .sidebar-title {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: var(--steel);
+            margin-bottom: var(--space-2);
+            letter-spacing: 0.5px;
+        }
+
+        .sidebar-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+            padding: var(--space-2) var(--space-3);
+            border-radius: var(--radius-sm);
+            color: var(--charcoal);
+            text-decoration: none;
+            margin-bottom: var(--space-1);
+            transition: all 0.2s ease;
+        }
+
+        .sidebar-item:hover {
+            background-color: var(--fog);
+        }
+
+        .sidebar-item.active {
+            background-color: var(--crimson);
+            color: var(--on-crimson);
+        }
+
+        .sidebar-icon {
+            width: 20px;
+            height: 20px;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: var(--space-6);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 10px 18px;
+            border-radius: var(--radius-sm);
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2);
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .btn-primary {
+            background-color: var(--crimson);
+            color: var(--on-crimson);
+        }
+
+        .btn-primary:hover {
+            background-color: #7F1B2A;
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            border: 1px solid var(--crimson);
+            color: var(--crimson);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--crimson);
+            color: var(--on-crimson);
+        }
+
+        .btn-ghost {
+            background-color: transparent;
+            color: var(--charcoal);
+        }
+
+        .btn-ghost:hover {
+            background-color: var(--fog);
+        }
+
+        /* Cards */
+        .card {
+            background-color: white;
+            border-radius: var(--radius-md);
+            padding: var(--space-6);
+            box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+            margin-bottom: var(--space-4);
+        }
+
+        .job-card {
+            background-color: var(--cream);
+            border-left: 4px solid var(--crimson);
+        }
+
+        .job-card h3 {
+            color: var(--crimson);
+            margin-bottom: var(--space-2);
+        }
+
+        .job-meta {
+            display: flex;
+            gap: var(--space-4);
+            color: var(--charcoal);
+            margin-bottom: var(--space-3);
+        }
+
+        .job-meta-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-1);
+            font-size: 14px;
+        }
+
+        .meta-icon {
+            width: 16px;
+            height: 16px;
+            color: var(--crimson);
+        }
+
+        /* Grid Layout */
+        .row {
+            display: flex;
+            gap: var(--space-6);
+            margin-bottom: var(--space-6);
+        }
+
+        .col-2-3 {
+            flex: 2;
+        }
+
+        .col-1-3 {
+            flex: 1;
+        }
+
+        .col-1-3 .card {
+            height: 100%;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-4);
+            margin-bottom: var(--space-6);
+        }
+
+        .metric-card {
+            background-color: white;
+            border-radius: var(--radius-md);
+            padding: var(--space-4);
+            box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+            text-align: center;
+        }
+
+        .metric-icon {
+            width: 32px;
+            height: 32px;
+            color: var(--crimson);
+            margin: 0 auto var(--space-2);
+        }
+
+        .metric-number {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--crimson);
+            margin-bottom: var(--space-1);
+        }
+
+        .metric-label {
+            color: var(--charcoal);
+            font-size: 14px;
+        }
+
+        /* Profile Completion */
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background-color: var(--fog);
+            border-radius: var(--radius-full);
+            overflow: hidden;
+            margin: var(--space-3) 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: var(--crimson);
+            border-radius: var(--radius-full);
+            transition: width 0.3s ease;
+        }
+
+        /* Badges */
+        .badge {
+            padding: 4px 8px;
+            border-radius: var(--radius-sm);
+            font-size: 12px;
+            font-weight: 500;
+            display: inline-block;
+        }
+
+        .badge-success {
+            background-color: #ECFDF3;
+            color: #166534;
+        }
+
+        .badge-active {
+            background-color: #EFF6FF;
+            color: #1D4ED8;
+        }
+
+        .badge-pending {
+            background-color: #FEF3C7;
+            color: #92400E;
+        }
+
+        .tag-chip {
+            background-color: var(--fog);
+            color: var(--charcoal);
+            padding: 4px 12px;
+            border-radius: var(--radius-full);
+            font-size: 12px;
+            display: inline-block;
+            margin-right: var(--space-2);
+        }
+
+        /* Divider */
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, var(--crimson) 0%, transparent 100%);
+            margin: var(--space-4) 0;
+            opacity: 0.3;
+        }
+
+        /* Form Elements */
+        .form-group {
+            margin-bottom: var(--space-4);
+        }
+
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--charcoal);
+            margin-bottom: var(--space-2);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid var(--fog);
+            border-radius: var(--radius-sm);
+            background-color: var(--paper);
+            font-size: 14px;
+            transition: border-color 0.2s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--crimson);
+        }
+
+        .form-helper {
+            font-size: 13px;
+            color: var(--steel);
+            margin-top: var(--space-1);
+        }
+
+        /* Color Palette Display */
+        .color-palette {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-4);
+            margin-bottom: var(--space-6);
+        }
+
+        .color-swatch {
+            height: 80px;
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 500;
+            margin-bottom: var(--space-2);
+        }
+
+        .color-info {
+            text-align: center;
+        }
+
+        .color-name {
+            font-weight: 600;
+            margin-bottom: var(--space-1);
+        }
+
+        .color-hex {
+            font-family: monospace;
+            color: var(--steel);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .dashboard-layout {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                order: 2;
+            }
+            
+            .main-content {
+                order: 1;
+            }
+            
+            .row {
+                flex-direction: column;
+            }
+            
+            .metrics-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Navigation -->
+    <nav class="top-nav">
+        <div class="logo display-font">Nupes at Work</div>
+        <div class="nav-right">
+            <svg class="nav-icon" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"/>
+            </svg>
+            <div class="user-avatar">JD</div>
+        </div>
+    </nav>
+
+    <div class="dashboard-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <div class="sidebar-title">Core</div>
+                <a href="#" class="sidebar-item active">
+                    <svg class="sidebar-icon" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                    </svg>
+                    Dashboard
+                </a>
+                <a href="#" class="sidebar-item">
+                    <svg class="sidebar-icon" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                    </svg>
+                    Jobs
+                </a>
+                <a href="#" class="sidebar-item">
+                    <svg class="sidebar-icon" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M6.672 1.911a1 1 0 10-1.932.518l.259.966a1 1 0 001.932-.518l-.26-.966zM2.429 4.74a1 1 0 10-.517 1.932l.966.259a1 1 0 00.517-1.932l-.966-.26zm8.814-.569a1 1 0 00-1.415-1.414l-.707.707a1 1 0 101.415 1.415l.707-.708zm-7.071 7.072l.707-.707A1 1 0 003.465 9.12l-.708.707a1 1 0 001.415 1.415zm3.2-5.171a1 1 0 00-1.3 1.3l4 10a1 1 0 001.823.075l1.38-2.759 3.018 3.02a1 1 0 001.414-1.415l-3.019-3.02 2.76-1.379a1 1 0 00-.076-1.822l-10-4z" clip-rule="evenodd"/>
+                    </svg>
+                    Network
+                </a>
+            </div>
+            
+            <div class="sidebar-section">
+                <div class="sidebar-title">Profile & Resources</div>
+                <a href="#" class="sidebar-item">
+                    <svg class="sidebar-icon" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/>
+                    </svg>
+                    My Profile
+                </a>
+                <a href="#" class="sidebar-item">
+                    <svg class="sidebar-icon" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"/>
+                    </svg>
+                    Resources
+                </a>
+                <a href="#" class="sidebar-item">
+                    <svg class="sidebar-icon" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                    </svg>
+                    Achievements
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Welcome Section -->
+            <div class="row">
+                <div class="col-2-3">
+                    <h1 class="display-font" style="color: var(--crimson);">Welcome, Brother Johnson</h1>
+                    <p class="body" style="color: var(--charcoal);">Here's where your next opportunity begins.</p>
+                    <div class="divider"></div>
+                </div>
+                <div class="col-1-3">
+                    <div class="card">
+                        <h3 style="margin-bottom: var(--space-3);">Profile Strength</h3>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 75%;"></div>
+                        </div>
+                        <p style="font-size: 14px; color: var(--charcoal); margin-bottom: var(--space-3);">75% Complete</p>
+                        <button class="btn btn-primary" style="width: 100%;">Complete Profile</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Metrics Row -->
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <svg class="metric-icon" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                    </svg>
+                    <div class="metric-number">12</div>
+                    <div class="metric-label">Jobs Applied</div>
+                </div>
+                <div class="metric-card">
+                    <svg class="metric-icon" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M6.672 1.911a1 1 0 10-1.932.518l.259.966a1 1 0 001.932-.518l-.26-.966zM2.429 4.74a1 1 0 10-.517 1.932l.966.259a1 1 0 00.517-1.932l-.966-.26zm8.814-.569a1 1 0 00-1.415-1.414l-.707.707a1 1 0 101.415 1.415l.707-.708zm-7.071 7.072l.707-.707A1 1 0 003.465 9.12l-.708.707a1 1 0 001.415 1.415zm3.2-5.171a1 1 0 00-1.3 1.3l4 10a1 1 0 001.823.075l1.38-2.759 3.018 3.02a1 1 0 001.414-1.415l-3.019-3.02 2.76-1.379a1 1 0 00-.076-1.822l-10-4z" clip-rule="evenodd"/>
+                    </svg>
+                    <div class="metric-number">48</div>
+                    <div class="metric-label">Connections Made</div>
+                </div>
+                <div class="metric-card">
+                    <svg class="metric-icon" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                    </svg>
+                    <div class="metric-number">7</div>
+                    <div class="metric-label">Saved Roles</div>
+                </div>
+            </div>
+
+            <!-- Job Listings -->
+            <div class="row">
+                <div class="col-2-3">
+                    <h2 style="color: var(--crimson);">Opportunities for Achievement</h2>
+                    
+                    <div class="job-card">
+                        <h3>Senior Software Engineer</h3>
+                        <div class="job-meta">
+                            <div class="job-meta-item">
+                                <svg class="meta-icon" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M4 4a2 2 0 012-2h8a2 2 0 012 2v12a1 1 0 110 2h-3a1 1 0 01-1-1v-2a1 1 0 00-1-1H9a1 1 0 00-1 1v2a1 1 0 01-1 1H4a1 1 0 110-2V4zm3 1h2v2H7V5zm2 4H7v2h2V9zm2-4h2v2h-2V5zm2 4h-2v2h2V9z" clip-rule="evenodd"/>
+                                </svg>
+                                TechCorp Solutions
+                            </div>
+                            <div class="job-meta-item">
+                                <svg class="meta-icon" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                                </svg>
+                                Atlanta, GA
+                            </div>
+                        </div>
+                        <p style="color: var(--charcoal); margin-bottom: var(--space-3);">Lead development of enterprise applications using modern tech stack...</p>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <span class="tag-chip">Engineering</span>
+                                <span class="tag-chip">Full-time</span>
+                                <span class="badge badge-success">Actively Hiring</span>
+                            </div>
+                            <button class="btn btn-primary">Apply Now</button>
+                        </div>
+                    </div>
+
+                    <div class="job-card">
+                        <h3>Product Marketing Manager</h3>
+                        <div class="job-meta">
+                            <div class="job-meta-item">
+                                <svg class="meta-icon" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M4 4a2 2 0 012-2h8a2 2 0 012 2v12a1 1 0 110 2h-3a1 1 0 01-1-1v-2a1 1 0 00-1-1H9a1 1 0 00-1 1v2a1 1 0 01-1 1H4a1 1 0 110-2V4zm3 1h2v2H7V5zm2 4H7v2h2V9zm2-4h2v2h-2V5zm2 4h-2v2h2V9z" clip-rule="evenodd"/>
+                                </svg>
+                                InnovateCo
+                            </div>
+                            <div class="job-meta-item">
+                                <svg class="meta-icon" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                                </svg>
+                                Remote
+                            </div>
+                        </div>
+                        <p style="color: var(--charcoal); margin-bottom: var(--space-3);">Drive product marketing strategy and campaign execution for B2B SaaS platform...</p>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <span class="tag-chip">Marketing</span>
+                                <span class="tag-chip">Remote</span>
+                                <span class="badge badge-active">New</span>
+                            </div>
+                            <button class="btn btn-primary">Apply Now</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-1-3">
+                    <div class="card">
+                        <h3 style="margin-bottom: var(--space-3);">Filters</h3>
+                        <div class="form-group">
+                            <label class="form-label">Location</label>
+                            <select class="form-input">
+                                <option>All Locations</option>
+                                <option>Atlanta, GA</option>
+                                <option>Remote</option>
+                                <option>New York, NY</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Industry</label>
+                            <select class="form-input">
+                                <option>All Industries</option>
+                                <option>Technology</option>
+                                <option>Finance</option>
+                                <option>Healthcare</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Experience Level</label>
+                            <select class="form-input">
+                                <option>All Levels</option>
+                                <option>Entry Level</option>
+                                <option>Mid Level</option>
+                                <option>Senior Level</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-secondary" style="width: 100%;">Apply Filters</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Resources & Community -->
+            <div class="row">
+                <div class="col-1-2">
+                    <div class="card">
+                        <h3 style="color: var(--crimson); margin-bottom: var(--space-3);">
+                            <svg style="width: 20px; height: 20px; margin-right: var(--space-2); vertical-align: middle;" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"/>
+                            </svg>
+                            Career Resources
+                        </h3>
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="margin-bottom: var(--space-2);">
+                                <a href="#" style="color: var(--crimson); text-decoration: none;">Resume Templates</a>
+                            </li>
+                            <li style="margin-bottom: var(--space-2);">
+                                <a href="#" style="color: var(--crimson); text-decoration: none;">Interview Preparation Guide</a>
+                            </li>
+                            <li style="margin-bottom: var(--space-2);">
+                                <a href="#" style="color: var(--crimson); text-decoration: none;">Salary Negotiation Tips</a>
+                            </li>
+                            <li>
+                                <a href="#" style="color: var(--crimson); text-decoration: none;">Professional Development Courses</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-1-2">
+                    <div class="card">
+                        <h3 style="color: var(--crimson); margin-bottom: var(--space-3);">
+                            <svg style="width: 20px; height: 20px; margin-right: var(--space-2); vertical-align: middle;" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"/>
+                            </svg>
+                            Community Highlights
+                        </h3>
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="margin-bottom: var(--space-2);">
+                                <a href="#" style="color: var(--crimson); text-decoration: none;">Brother Spotlight: James Wilson</a>
+                            </li>
+                            <li style="margin-bottom: var(--space-2);">
+                                <a href="#" style="color: var(--crimson); text-decoration: none;">Upcoming Networking Event</a>
+                            </li>
+                            <li style="margin-bottom: var(--space-2);">
+                                <a href="#" style="color: var(--crimson); text-decoration: none;">Mentorship Program Sign-up</a>
+                            </li>
+                            <li>
+                                <a href="#" style="color: var(--crimson); text-decoration: none;">Chapter Success Stories</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Color Palette Section -->
+            <div class="card">
+                <h2 style="color: var(--crimson); margin-bottom: var(--space-4);">Color Palette</h2>
+                <div class="color-palette">
+                    <div>
+                        <div class="color-swatch" style="background-color: var(--crimson);">Crimson</div>
+                        <div class="color-info">
+                            <div class="color-name">Crimson</div>
+                            <div class="color-hex">#9D2235</div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="color-swatch" style="background-color: var(--cream); color: var(--on-cream);">Cream</div>
+                        <div class="color-info">
+                            <div class="color-name">Cream</div>
+                            <div class="color-hex">#F5E1C8</div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="color-swatch" style="background-color: var(--gold);">Gold</div>
+                        <div class="color-info">
+                            <div class="color-name">Gold Accent</div>
+                            <div class="color-hex">#CFAF5A</div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="color-swatch" style="background-color: var(--success);">Success</div>
+                        <div class="color-info">
+                            <div class="color-name">Success</div>
+                            <div class="color-hex">#059669</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
